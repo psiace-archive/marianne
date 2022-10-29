@@ -5,11 +5,104 @@ description = "marianne - the best assistant, always high five"
 authors = [
     {name = "Chojan Shang", email = "psiace@outlook.com"},
 ]
-dependencies = []
+dependencies = [
+    "typer>=0.6.1",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT OR APACHE-2.0"}
 
+[project.optional-dependencies]
+
+[project.scripts]
+marianne = "src.__main__:main"
+
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+[tool.pdm.build]
+excludes = ["./**/.git"]
+package-dir = "src"
+includes = ["src"]
+source-includes = ["tests", "LICENSE-MIT", "LICENSE-APACHE", "README.md"]
+# editables backend doesn't work well with namespace packages
+editable-backend = "path"
+[tool.pdm.scripts]
+test = "pytest"
+tox = "tox"
+doc = {shell = "cd docs && mkdocs serve", help = "Start the dev server for doc preview"}
+lint = "pre-commit run --all-files"
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.2.0",
+    "pytest-cov>=4.0.0",
+]
+tox = [
+    "tox>=3.27.0",
+    "tox-pdm>=0.5.0",
+]
+lint = [
+    "pre-commit>=2.20.0",
+]
+doc = [
+    "mkdocs>=1.4.1",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+  "ignore::DeprecationWarning"
+]
+markers = [
+    "network: Tests that require network",
+    "integration: Run with all Python versions",
+    "path: Tests that compare with the system paths",
+    "deprecated: Tests about deprecated features",
+]
+addopts = "-r aR"
+testpaths = [
+    "tests/",
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py310
+# Make sure to install the Python versions listed here.
+isolated_build = True
+
+[testenv]
+deps = pytest
+groups = test
+commands = test {posargs}
+
+[testenv:lint]
+groups = lint
+skip_install = true
+commands = lint
+"""
+
+[tool.black]
+line-length = 88
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | tests/fixtures
+)/
+'''
+[tool.isort]
+profile = "black"
+atomic = true
+skip_glob = ["*/setup.py"]
+filter_files = true
