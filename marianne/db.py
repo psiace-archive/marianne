@@ -47,6 +47,20 @@ def insert_metadata(metadata):
     db.close()
 
 
+def select_all_metadata():
+    db = get_db()
+
+    try:
+        rows = db.execute(
+            "SELECT * FROM METADATA ORDER BY title",
+        )
+        db.close()
+        return rows
+    except Exception as e:
+        print("[!] Error select data from database ->", e)
+        return []
+
+
 @click.command("init-db")
 def init_db_command():
     """Clear the existing data and create new tables."""
