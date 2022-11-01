@@ -37,14 +37,13 @@ def insert_metadata(metadata):
 
     try:
         db.executemany(
-            "INSERT OR REPLACE INTO METADATA (title, url, desc) values(?, ?, ?)",
+            "INSERT OR REPLACE INTO METADATA (title, url, description) values(?, ?, ?)",
             [metadata],
         )
     except Exception as e:
         print("[!] Error updating database ->", e)
 
     db.commit()
-    db.close()
 
 
 def select_all_metadata():
@@ -53,8 +52,7 @@ def select_all_metadata():
     try:
         rows = db.execute(
             "SELECT * FROM METADATA ORDER BY title",
-        )
-        db.close()
+        ).fetchall()
         return rows
     except Exception as e:
         print("[!] Error select data from database ->", e)
