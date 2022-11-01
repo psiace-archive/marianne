@@ -12,6 +12,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY="dev",
         METADATA_DATABASE=os.path.join(app.instance_path, "metadata.sqlite"),
+        TEMPLATES_AUTO_RELOAD=True,
+        CRAWLER_LIMIT=10,
     )
 
     if test_config is None:
