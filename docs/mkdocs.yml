@@ -1,1 +1,29 @@
 site_name: marianne
+
+
+nav:
+  - Home: index.md
+  - Slides:
+    - Overview: slides/overview.md
+
+theme:
+  name: material
+  custom_dir: theme
+  palette:
+    primary: black
+    accent: red
+  feature:
+    tabs: true
+
+reveal:
+  path: reveal.js/
+  transition: slide
+  theme:
+    name: moon.css
+    path: theme
+  plugin:
+    path: reveal.js/plugin
+
+extra:
+  author:
+    name: psiace
