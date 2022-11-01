@@ -12,6 +12,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY="dev",
         METADATA_DATABASE=os.path.join(app.instance_path, "metadata.sqlite"),
+        SPAM_DETECT_MODEL=os.path.join(app.instance_path, "spam_detect_model.model"),
+        DATA_PATH=os.path.join(app.instance_path, "data"),
         TEMPLATES_AUTO_RELOAD=True,
         CRAWLER_LIMIT=10,
     )
@@ -34,8 +36,9 @@ def create_app(test_config=None):
     app.register_blueprint(search.bp)
     app.add_url_rule("/", endpoint="index")
 
-    from . import db
+    from . import db, model
 
     db.init_app(app)
+    model.init_app(app)
 
     return app
