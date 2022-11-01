@@ -14,9 +14,6 @@ license = {text = "MIT OR APACHE-2.0"}
 
 [project.optional-dependencies]
 
-[project.scripts]
-marianne = "src.__main__:main"
-
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
@@ -31,7 +28,7 @@ source-includes = ["tests", "LICENSE-MIT", "LICENSE-APACHE", "README.md"]
 # editables backend doesn't work well with namespace packages
 editable-backend = "path"
 [tool.pdm.scripts]
-start = "flask --app marianne run"
+marianne = "flask --app marianne"
 test = "pytest"
 tox = "tox"
 doc = {shell = "cd docs && mkdocs serve", help = "Start the dev server for doc preview"}
