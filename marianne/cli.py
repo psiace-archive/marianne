@@ -1,5 +1,5 @@
 """This module provides the marianne CLI."""
-# src/cli.py
+# marianne/cli.py
 
 from typing import Optional
 

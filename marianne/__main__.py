@@ -1,5 +1,5 @@
 """The marianne entry point script."""
-# src/__main__.py
+# marianne/__main__.py
 
 from . import __app_name__, cli
 

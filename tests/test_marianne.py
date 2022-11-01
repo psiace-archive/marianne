@@ -2,7 +2,7 @@
 
 from typer.testing import CliRunner
 
-from src import __app_name__, __version__, cli
+from marianne import __app_name__, __version__, cli
 
 runner = CliRunner()
 
