@@ -32,6 +32,21 @@ def init_db():
         db.executescript(f.read().decode("utf8"))
 
 
+def insert_metadata(metadata):
+    db = get_db()
+
+    try:
+        db.executemany(
+            "INSERT OR REPLACE INTO METADATA (title, url, desc) values(?, ?, ?)",
+            [metadata],
+        )
+    except Exception as e:
+        print("[!] Error updating database ->", e)
+
+    db.commit()
+    db.close()
+
+
 @click.command("init-db")
 def init_db_command():
     """Clear the existing data and create new tables."""
