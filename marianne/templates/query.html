@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>marianne - {{query}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+    <style>
+        header,
+        main {
+            margin: 0 auto;
+            max-width: var(--width-content);
+            padding: 1rem 1rem;
+        }
+
+        nav {
+            align-items: center;
+            display: flex;
+            font-weight: bold;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            align-items: center;
+            border: 0px;
+            border-radius: 0px;
+            box-shadow: 0px 0px 0px 0px;
+            display: flex;
+            max-width: var(--width-card-wide);
+            min-width: var(--width-card);
+            padding: 1rem;
+            text-align: var(--justify-normal);
+        }
+
+        .res {
+            width: 800px;
+            max-width: 90%;
+        }
+
+        .ttl>a {
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .url {
+            color: #3a5a0c;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/"><img alt="Logo" src="/static/logo.png" height="70"></a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/submit">Submit Your Website</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% if result_num == 0 %}
+    <section>
+        <form method="get" align="center" style="display: inline-block;">
+            <input type="text" aria-label="Search what you want" placeholder="Search what you want..." value="{{query}}"
+                name="q">
+        </form>
+        <ul>
+            <li><i>{{result_num}} results</i></li>
+        </ul>
+        <P></P>
+
+        <div align="center">
+            <img src="https://picsum.photos/300/150">
+        </div>
+    </section>
+    {% else %}
+    <main>
+        <form method="get" style="display: inline-block;">
+            <input type="text" aria-label="Search what you want" placeholder="Search what you want..." value="{{query}}"
+                name="q">
+        </form>
+        <sub><b><i>{{result_num}} results</i></b></sub>
+        {% for r in results%}
+        <ul>
+            <li class="ttl"><a rel="nofollow" href="{{r[1]}}">{{r[0]}}</a></li>
+            <li class="url">{{r[1]}}</li>
+            <li>{{r[2]}}</li>
+        </ul>
+        {% endfor %}
+        </mian>
+        {% endif %}
+        <div align="center">
+            {% for n in range(page_num) %}
+            <a href="?q={{query}}&p={{n+1}}">{{n+1}}</a>
+            {% endfor %}
+        </div>
+        <footer>
+            <p align="center">
+                <small>©2022 marianne - <a href="/about">about</a></small>
+            </p>
+        </footer>
+</body>
+
+</html>
