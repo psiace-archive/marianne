@@ -27,10 +27,10 @@ def url_crawler(url, limit=0):
         title = get_title(html)  # type: ignore
         # found a bug here with some websites
         # here it is a fix
-        if title is None:
+        if title is None or title == "":
             title = "No title provided"
         desc = get_description(html)  # type: ignore
-        if desc is None:
+        if desc is None or desc == "":
             desc = "No description provided"
         insert_metadata((str(title), url, str(desc)))
 
@@ -63,7 +63,7 @@ def url_sanitize(url):
     if url.startswith("//"):
         url = "https://" + url[2:]
     if url.endswith("/"):
-        url = urljoin(url, ".")
+        url = url[0:-1]
     while "/./" in url:
         url = url.replace("/./", "/")
     return url
