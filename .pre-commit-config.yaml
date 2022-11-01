@@ -28,7 +28,7 @@ repos:
     rev: v0.981
     hooks:
       - id: mypy
-        args: [src]
+        args: [marianne]
         pass_filenames: false
         additional_dependencies:
           - types-requests
