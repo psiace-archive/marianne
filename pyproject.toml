@@ -6,7 +6,7 @@ authors = [
     {name = "Chojan Shang", email = "psiace@outlook.com"},
 ]
 dependencies = [
-    "typer>=0.6.1",
+    "flask>=2.2.2",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -31,6 +31,7 @@ source-includes = ["tests", "LICENSE-MIT", "LICENSE-APACHE", "README.md"]
 # editables backend doesn't work well with namespace packages
 editable-backend = "path"
 [tool.pdm.scripts]
+start = "flask --app marianne run"
 test = "pytest"
 tox = "tox"
 doc = {shell = "cd docs && mkdocs serve", help = "Start the dev server for doc preview"}
