@@ -37,7 +37,7 @@ def insert_metadata(metadata):
 
     try:
         db.executemany(
-            "INSERT OR REPLACE INTO METADATA (title, url, description) values(?, ?, ?)",
+            "INSERT OR REPLACE INTO METADATA (title, url, description, label) values(?, ?, ?, ?)",
             [metadata],
         )
     except Exception as e:

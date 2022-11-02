@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 from .db import insert_metadata
+from .model import predict_text
 
 
 def url_crawler(url, limit=0):
@@ -32,7 +33,9 @@ def url_crawler(url, limit=0):
         desc = get_description(html)  # type: ignore
         if desc is None or desc == "":
             desc = "No description provided"
-        insert_metadata((str(title), url, str(desc)))
+        # check if the website metadata is spam or not
+        text_class = classify_text(url, str(desc))
+        insert_metadata((str(title), url, str(desc), text_class))
 
         if limit > 0:
             crawl_more_url(url, html, limit)
@@ -95,3 +98,13 @@ def get_description(html):
     elif html.find("p"):
         description = html.find("p").contents
     return description
+
+
+def classify_text(url, desc):
+    """Classify text."""
+    desc_class = predict_text(desc)
+    if desc_class == "spam":
+        print("[!] Website may be spam ->", url)
+        return "spam"
+    else:
+        return "ham"

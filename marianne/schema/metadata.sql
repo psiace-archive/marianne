@@ -5,5 +5,6 @@ DROP TABLE IF EXISTS METADATA;
 CREATE TABLE METADATA (
     title TEXT,
     url TEXT UNIQUE,
-    description TEXT
+    description TEXT,
+    label TEXT
 );
