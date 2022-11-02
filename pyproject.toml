@@ -7,6 +7,9 @@ authors = [
 ]
 dependencies = [
     "flask>=2.2.2",
+    "joblib>=1.2.0",
+    "pandas>=1.5.1",
+    "sklearn>=0.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
