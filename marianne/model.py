@@ -12,32 +12,41 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 
 def get_model():
-    if "model" not in g:
-        g.model = joblib.load(current_app.config["SPAM_DETECT_MODEL"])
+    if "model" not in g or "vc" not in g:
+        g.model = joblib.load(
+            os.path.join(current_app.config["SPAM_DETECT_MODEL"], "randomforest.model")
+        )
+        g.vc = joblib.load(
+            os.path.join(current_app.config["SPAM_DETECT_MODEL"], "randomforest.vc")
+        )
 
-    return g.model
+    return [g.model, g.vc]
 
 
 def close_model(e=None):
-    model = g.pop("model", None)
+    g.pop("model", None)
+    g.pop("vc", None)
 
-    if model is not None:
-        model.close()
 
 def predict_text(text):
-    model = get_model()
-    count_vect = CountVectorizer()
-    cv_text = count_vect.fit_transform([text])
+    [model, vc] = get_model()
+    cv_text = vc.transform([text])
     return model.predict(cv_text)
 
+
 def init_model():
-    data = pd.read_csv(os.path.join(current_app.config["DATA_PATH"], "spam_and_ham_text.csv"))
-    data = data[['label', 'text']]
-    count_vect = CountVectorizer()
-    x_train_counts = count_vect.fit_transform(data['text'])
-    model = RandomForestClassifier(n_estimators=100 )
-    model.fit(x_train_counts, data['label'])
-    joblib.dump(model, current_app.config["SPAM_DETECT_MODEL"])
+    data = pd.read_csv(
+        os.path.join(current_app.config["DATA_PATH"], "spam_and_ham_text.csv")
+    )
+    data = data[["label", "text"]]
+    vc = CountVectorizer()
+    x_train_counts = vc.fit_transform(data["text"])
+    model = RandomForestClassifier(n_estimators=100)
+    model.fit(x_train_counts, data["label"])
+    joblib.dump(
+        model, current_app.config["SPAM_DETECT_MODEL"] + "/" + "randomforest.model"
+    )
+    joblib.dump(vc, current_app.config["SPAM_DETECT_MODEL"] + "/" + "randomforest.vc")
 
 
 @click.command("init-model")
