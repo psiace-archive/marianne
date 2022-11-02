@@ -1,6 +1,6 @@
 # marianne
 
-marianne - the best assistant, always high five
+marianne - the best search engine, just for fun
 
 ## License
 
