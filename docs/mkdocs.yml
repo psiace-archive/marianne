@@ -1,5 +1,5 @@
 site_name: marianne
-
+site_url: https://psice.github.io/marianne
 
 nav:
   - Home: index.md
@@ -16,7 +16,7 @@ theme:
     tabs: true
 
 reveal:
-  path: reveal.js/
+  path: reveal.js
   transition: slide
   theme:
     name: moon.css
