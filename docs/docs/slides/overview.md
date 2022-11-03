@@ -149,7 +149,7 @@ We introduce a random forest model and build a lightweight model, based on the s
 
 --
 
-Random forest is a supervised machine learning algorithm, it is ccurate, simple and flexible.
+Random forest is a supervised machine learning algorithm, it is accurate, simple and flexible.
 
 ![](https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg)
 
