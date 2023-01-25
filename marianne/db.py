@@ -5,6 +5,7 @@ import sqlite3
 
 import click
 from flask import current_app, g
+from loguru import logger
 
 
 def get_db():
@@ -41,7 +42,7 @@ def insert_metadata(metadata):
             [metadata],
         )
     except Exception as e:
-        print("[!] Error updating database ->", e)
+        logger.error("[!] Error updating database ->", e)
 
     db.commit()
 
@@ -55,7 +56,7 @@ def select_all_metadata():
         ).fetchall()
         return rows
     except Exception as e:
-        print("[!] Error select data from database ->", e)
+        logger.error("[!] Error select data from database ->", e)
         return []
 
 
