@@ -2,6 +2,20 @@
 
 marianne - the best search engine, just for fun
 
+## Usage
+
+_**Just for development.**_
+
+1. Install pdm to manage python dependencies, ref [pdm | Installation](https://github.com/pdm-project/pdm#installation).
+2. Install all dependencies via `pdm install --dev`
+3. Run the app
+
+    ```bash
+    flask --app marianne init-db
+    flask --app marianne init-model
+    flask --app marianne run
+    ```
+
 ## License
 
 This library is licensed under either of:
