@@ -12,6 +12,7 @@ dependencies = [
     "sklearn>=0.0",
     "beautifulsoup4>=4.11.1",
     "loguru>=0.6.0",
+    "nltk>=3.8.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -53,6 +54,14 @@ lint = [
 doc = [
     "mkdocs>=1.4.1",
     "mkdocs-material>=8.5.7",
+    "mkdocs-jupyter>=0.22.0",
+]
+model = [
+    "jupyter>=1.0.0",
+    "notebook>=6.5.2",
+    "matplotlib>=3.6.3",
+    "wordcloud @ git+https://github.com/amueller/word_cloud.git",
+    "seaborn>=0.12.2",
 ]
 
 [tool.pytest.ini_options]
