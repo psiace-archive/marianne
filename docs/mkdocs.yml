@@ -3,8 +3,13 @@ site_url: https://psiace.github.io/marianne
 
 nav:
   - Home: index.md
+  - Model Explanation:
+    - Spam Detect: models/spam_detect.ipynb
   - Slides:
     - Overview: slides/overview.md
+
+plugins:
+  - mkdocs-jupyter
 
 theme:
   name: material
