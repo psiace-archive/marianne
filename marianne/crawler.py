@@ -5,6 +5,7 @@ from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
+from loguru import logger
 
 from .db import insert_metadata
 from .model import predict_text
@@ -18,9 +19,9 @@ def url_crawler(url, limit=0):
         result = urlopen(request)
         result_string = result.read().decode("utf8")
         result.close()
-        print("[!] Success fetching ->", url)
+        logger.info("[!] Success fetching ->", url)
     except Exception as e:
-        print("[!] Error fetching a submitted website (", url, ") -> ", e)
+        logger.error("[!] Error fetching a submitted website (", url, ") -> ", e)
     else:
         # the website has been reached (its contents too),
         # add it to the db then
@@ -104,7 +105,7 @@ def classify_text(url, desc):
     """Classify text."""
     desc_class = predict_text(desc)
     if desc_class == "spam":
-        print("[!] Website may be spam ->", url)
+        logger.warning("[!] Website may be spam ->", url)
         return "spam"
     else:
         return "ham"
