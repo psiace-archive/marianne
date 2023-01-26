@@ -1,0 +1,32 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "*.md"
+      - docs/**
+      - .github/workflows/docs.yml
+      - "marianne/**"
+
+jobs:
+  build-doc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+          architecture: "x64"
+      - name: Install Dependencies
+        run: |
+          pip install -U pdm
+          pdm install -G doc
+      - name: Build Documentation
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git fetch origin gh-pages:gh-pages
+          cd docs && pdm run mkdocs gh-deploy
