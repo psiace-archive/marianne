@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block header %} <h2> {% block title %} Retrieve Your Own {% endblock %} </h2>
+<br />
+<p>You can <i><mark>retrieve</mark></i> one of your own pictures by uploading, and the result will show the <b>5
+        best-reviewed</b> pictures.</p>
+A little click, awesome result. Everything at your fingertips.
+{% endblock %}
+
+{% block content %}
+<hr>
+<div class="container center-container">
+
+    <!-- child template -->
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Select an Image</h2>
+            <br>
+
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <input type="submit">
+            </form>
+
+        </div>
+
+        <div class="col-md-3 col-md-offset-1">
+            <h2>Results</h2>
+            <br>
+            <table class="table" id="results-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="results">
+                </tbody>
+            </table>
+            <p> The Result will be displayed on here. </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
