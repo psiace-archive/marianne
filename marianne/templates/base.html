@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %} - Poly Domino</title>
+
+    <!-- stylesheets -->
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+
+    {% block source %}{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h2>CBIR + Flask</h2>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/demo">Demo</a></li>
+                <li><a href="/query">Query</a></li>
+            </ul>
+        </nav>
+        {% block header %}{% endblock %}
+    </header>
+    <main>
+        {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+        <!-- errors -->
+        {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
+    </main>
+    <footer>
+        {% block footer %}
+        <hr />
+        <p style="float: left;">
+            Made by <a href="https://github.com/psiace" target="_blank">Chojan Shang &nearr;</a>. </p>
+        <p style="float: right;">Powered by <a href="https://github.com/psiace/polydomino" target="_blank">Poly Domino
+                &nearr;</a> =
+            <a href="https://baike.baidu.com/item/%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AE%B9%E7%9A%84%E5%9B%BE%E5%83%8F%E6%A3%80%E7%B4%A2/10506348?fr=aladdin"
+                target="_blank"> CBIR &nearr;</a> + <a href="https://flask.palletsprojects.com" target="_blank">Flask
+                &nearr;</a>.<br />
+        </p>
+        <br />
+        <br />
+        <br />
+        {% endblock %}
+    </footer>
+
+</body>
+
+</html>
