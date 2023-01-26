@@ -9,12 +9,12 @@ dependencies = [
     "flask>=2.2.2",
     "joblib>=1.2.0",
     "pandas>=1.5.1",
-    "sklearn>=0.0",
+    "scikit-learn>=1.2",
     "beautifulsoup4>=4.11.1",
     "loguru>=0.6.0",
     "nltk>=3.8.1",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT OR APACHE-2.0"}
 
@@ -82,7 +82,7 @@ testpaths = [
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = py310
+envlist = py311
 # Make sure to install the Python versions listed here.
 isolated_build = True
 
