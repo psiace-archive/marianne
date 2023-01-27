@@ -1,20 +1,18 @@
 """The image features manager for marianne"""
 # marianne/features.py
 
-import os
-import re
-
-import cv2
-import click
-import joblib
 import glob
-import pandas as pd
-from flask import current_app, g
 
-from .imagesearch import Descriptor, Searcher
+import click
+import cv2
+
+from .imagesearch.descriptor import Descriptor
+from .imagesearch.searcher import Searcher
+
 
 def get_input_features(cd, query):
     return cd.color_moments(query)
+
 
 def search_image(query):
     RESULTS_ARRAY = []
@@ -36,11 +34,11 @@ def init_features():
     # open the output index file for writing
     output = open("marianne/static/unsplash-lite/features/features.csv", "w")
     # use glob to grab the image paths and loop over them
-    for imagePath in glob.glob("static/unsplash-lite/photos/*.jpg"):
+    for imagePath in glob.glob("marianne/static/unsplash-lite/photos/*.jpg"):
         # extract the image ID (i.e. the unique filename) from the image
         # path and load the image itself
         # imageID = imagePath[imagePath.rfind("/") + 1 :]
-        imageID = imagePath
+        imageID = "unsplash-lite/photos/" + imagePath[imagePath.rfind("/") + 1 :]
         image = cv2.imread(imagePath)
         # describe the image with color_moments
         features = cd.color_moments(image)

@@ -120,7 +120,7 @@ class Descriptor:
     def gray_matrix(self, image):
         try:
             img_shape = image.shape
-        except:
+        except BaseException:
             print("imread error")
             return -1
         img = image

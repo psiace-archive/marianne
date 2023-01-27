@@ -3,7 +3,7 @@
 
 import os
 
-from flask import Blueprint, current_app, render_template, request, jsonify
+from flask import Blueprint, current_app, jsonify, render_template, request
 from werkzeug.utils import secure_filename
 
 from .crawler import url_crawler
@@ -69,11 +69,13 @@ def submit():
                 info="That URL is over 100 characters long!",
             )
 
+
 ALLOWED_EXTENSIONS = set(["png", "jpg", "JPG", "PNG", "bmp"])
 
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1] in ALLOWED_EXTENSIONS
+
 
 @bp.route("/query_image", methods=["GET", "POST"])
 def query():
@@ -81,7 +83,12 @@ def query():
         f = request.files["file"]
 
         if not (f and allowed_file(f.filename)):
-            return jsonify({"error": 1001, "msg": "please check image type, only allow png、PNG、jpg、JPG、bmp"})
+            return jsonify(
+                {
+                    "error": 1001,
+                    "msg": "please check image type, only allow png、PNG、jpg、JPG、bmp",
+                }
+            )
 
         basepath = os.path.dirname(__file__)  # current directory
 
@@ -91,6 +98,7 @@ def query():
 
         f.save(upload_path)
         import cv2
+
         img = cv2.imread(upload_path)
         cv2.imwrite(os.path.join(basepath, "static/queries", "test.jpg"), img)
 

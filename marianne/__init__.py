@@ -9,7 +9,7 @@ from flask import Flask
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    app.jinja_env.filters['zip'] = zip 
+    app.jinja_env.filters["zip"] = zip
     app.config.from_mapping(
         SECRET_KEY="dev",
         METADATA_DATABASE=os.path.join(app.instance_path, "db/metadata.sqlite"),
@@ -37,7 +37,7 @@ def create_app(test_config=None):
     app.register_blueprint(search.bp)
     app.add_url_rule("/", endpoint="index")
 
-    from . import db, model, features
+    from . import db, features, model
 
     db.init_app(app)
     model.init_app(app)
