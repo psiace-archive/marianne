@@ -5,7 +5,7 @@ import csv
 
 import numpy as np
 import scipy.spatial.distance as dist
-from scipy.stats import kendalltau, pearsonr, spearmanr
+from scipy.stats import pearsonr, spearmanr
 
 
 class Searcher:
@@ -51,7 +51,7 @@ class Searcher:
                     exit(1)
 
                 # now that we have the distance between the two feature
-                # vectors, we can udpate the results dictionary -- the
+                # vectors, we can update the results dictionary -- the
                 # key is the current image ID in the index and the
                 # value is the distance we just computed, representing
                 # how 'similar' the image in the index is to our query
@@ -122,4 +122,4 @@ class Searcher:
 
         if similar == 0.0:
             similar = 1
-        return 
+        return
